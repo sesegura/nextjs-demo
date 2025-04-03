@@ -1,9 +1,9 @@
 import { Page, PageContent, PageHeader } from "@/components/ui/page";
 
-export default function Home() {
+export default function Gallery() {
   return (
     <Page>
-      <PageHeader>Image Generation</PageHeader>
+      <PageHeader>Gallery</PageHeader>
       <PageContent>Hola</PageContent>
     </Page>
   );
