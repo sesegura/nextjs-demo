@@ -15,6 +15,8 @@ export function PageHeader({ children }: React.PropsWithChildren) {
 
 export function PageContent({ children }: React.PropsWithChildren) {
   return (
-    <div className="flex-1 flex items-center justify-center">{children}</div>
+    <div className="flex-1 flex flex-col items-center justify-center">
+      {children}
+    </div>
   );
 }
