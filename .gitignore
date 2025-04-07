@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore local dev SQLite db
+*/dev.db
+*/dev.db-journal
