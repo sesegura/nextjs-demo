@@ -1,12 +1,11 @@
 "use client";
 
-import { useActionState, useOptimistic, useState } from "react";
+import { useActionState, useOptimistic } from "react";
 import { Card, CardContent } from "../ui/card";
 import { generateImage } from "./actions";
 import { ImageGenerationForm, Props } from "./form";
 import { GeneratedImageSchema } from "./schemas";
 import { Image } from "../ui/image";
-import { cn } from "@/lib/utils";
 
 export function ImageGenerationContent({
   promptIdea,

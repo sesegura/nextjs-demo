@@ -1,7 +1,9 @@
+"use server";
+
 import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPEN_AI_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const mockedIdeas = [
@@ -12,7 +14,7 @@ const mockedIdeas = [
 ];
 
 export async function getPromptIdea(): Promise<string> {
-  if (process.env.OPEN_AI_ENABLED == "0")
+  if (process.env.OPENAI_ENABLED == "0")
     return mockedIdeas[Math.floor(Math.random() * mockedIdeas.length)];
 
   try {
@@ -27,7 +29,7 @@ export async function getPromptIdea(): Promise<string> {
         {
           role: "user",
           content:
-            "Give me one creative and visual image prompt idea. Must be at most 100 characters long.",
+            "Give me one creative and visual image prompt idea. It NEEDS to be at most 100 characters long.",
         },
       ],
       temperature: 1.2,
