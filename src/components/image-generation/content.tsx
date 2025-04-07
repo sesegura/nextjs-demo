@@ -3,22 +3,22 @@
 import { useActionState, useOptimistic } from "react";
 import { Card, CardContent } from "../ui/card";
 import { generateImage } from "./actions";
-import { ImageGenerationForm, Props } from "./form";
-import { GeneratedImageSchema } from "./schemas";
 import { Image } from "../ui/image";
+import { Image as ImageSchema } from "../../../generated/prisma";
+import { ImageGenerationForm, Props } from "./form";
 
 export function ImageGenerationContent({
   promptIdea,
 }: Pick<Props, "promptIdea">) {
   const [imagePlaceholder, setImagePlaceholder] = useOptimistic(
     undefined,
-    (_: any, newImage?: GeneratedImageSchema) => newImage
+    (_: any, newImage?: ImageSchema) => newImage
   );
 
   const [generatedImage, formAction, pending] = useActionState(
     async (prevState: any, formData: FormData) => {
       const title = formData.get("prompt")?.toString() || "";
-      setImagePlaceholder({ id: String(Date.now()), url: "", title });
+      setImagePlaceholder({ id: Date.now(), url: "", title });
 
       return generateImage(prevState, formData);
     },

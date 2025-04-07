@@ -32,8 +32,8 @@ export async function getPromptIdea(): Promise<string> {
             "Give me one creative and visual image prompt idea. It NEEDS to be at most 100 characters long.",
         },
       ],
+      max_completion_tokens: 35,
       temperature: 1.2,
-      max_tokens: 35,
     });
 
     return response.choices?.[0]?.message?.content?.trim() || "";
