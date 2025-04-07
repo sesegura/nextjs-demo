@@ -1,39 +1,57 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 import { Skeleton } from "./skeleton";
+import { useState } from "react";
 
-interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   pending?: boolean;
 }
 
-export function Image({ alt, className, pending, src, ...imgProps }: Props) {
-  const [loaded, setLoaded] = useState(false);
+export function Image({
+  className,
+  pending,
+  src,
+  title,
+  ...imgProps
+}: ImageProps) {
+  const [loaded, setLoaded] = useState(src?.startsWith("data:image") || false);
   const ready = !pending && loaded;
 
   return (
-    <div className={cn("relative w-full aspect-[16/9]", className)}>
-      {!ready && <Skeleton className="w-full aspect-[16/9]" />}
+    <div className={cn("relative w-full aspect-square", className)}>
+      {!ready && <Skeleton className="w-full aspect-square" />}
       <img
         {...imgProps}
-        alt={alt}
         className={cn(
           "w-full h-auto rounded transition-opacity duration-300",
           ready ? "opacity-100 shadow-md" : "opacity-0 absolute top-0 left-0"
         )}
+        loading="lazy"
         onLoad={() => setLoaded(true)}
         src={src || undefined}
       />
-      <p
-        className={cn(
-          "text-md text-muted-foreground font-extralight italic",
-          !ready && "animate-pulse"
-        )}
-        title={alt}
-      >
-        {alt}
-      </p>
+      {title && <ImageTitle className="mt-4" loading={!ready} title={title} />}
     </div>
+  );
+}
+
+type ImageTitleProps = React.ComponentProps<"div"> & {
+  loading: boolean;
+  title: string;
+};
+
+function ImageTitle({ className, loading, title }: ImageTitleProps) {
+  return (
+    <p
+      className={cn(
+        "text-md text-muted-foreground font-extralight italic",
+        loading && "animate-pulse",
+        className
+      )}
+      title={title}
+    >
+      {title}
+    </p>
   );
 }

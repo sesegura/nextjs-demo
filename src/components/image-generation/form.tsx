@@ -14,10 +14,15 @@ import {
 
 export interface Props {
   formAction: (payload: FormData) => void;
+  placeholder: string;
   promptIdea?: string;
 }
 
-export function ImageGenerationForm({ formAction, promptIdea }: Props) {
+export function ImageGenerationForm({
+  formAction,
+  placeholder,
+  promptIdea,
+}: Props) {
   const [prompt, setPrompt] = useState("");
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -37,7 +42,7 @@ export function ImageGenerationForm({ formAction, promptIdea }: Props) {
         ref={inputRef}
         name="prompt"
         onChange={onChange}
-        placeholder="Start prompting..."
+        placeholder={placeholder}
         rows={1}
         value={prompt}
       />

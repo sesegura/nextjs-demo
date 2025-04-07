@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <Page>
       <PageHeader>Image Generation</PageHeader>
-      <PageContent>
+      <PageContent centered>
         <ImageGenerationContent promptIdea={promptIdea} />
         <div className="min-h-[154px]" />
       </PageContent>

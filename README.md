@@ -11,6 +11,7 @@ so they can later be re-mixed.
 - Prisma
 - OpenAI
 - ShadCN
+- Tailwind
 
 ## How to run
 

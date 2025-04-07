@@ -15,7 +15,7 @@ export function ImageGenerationContent({
     (_: any, newImage?: ImageSchema) => newImage
   );
 
-  const [generatedImage, formAction, pending] = useActionState(
+  const [, formAction, pending] = useActionState(
     async (prevState: any, formData: FormData) => {
       const title = formData.get("prompt")?.toString() || "";
       setImagePlaceholder({ id: Date.now(), url: "", title });
@@ -25,16 +25,17 @@ export function ImageGenerationContent({
     null
   );
 
-  const image = generatedImage || imagePlaceholder;
+  if (imagePlaceholder) {
+    const { title, url } = imagePlaceholder;
 
-  if (image) {
     return (
       <div className="w-full mx-auto md:w-1/2">
         <Image
-          alt={image.title}
+          alt={title}
           className="mt-4"
           pending={pending}
-          src={image.url}
+          src={url}
+          title={title}
         />
       </div>
     );
@@ -49,6 +50,7 @@ export function ImageGenerationContent({
         <CardContent>
           <ImageGenerationForm
             formAction={formAction}
+            placeholder="Start prompting..."
             promptIdea={promptIdea}
           />
         </CardContent>
