@@ -13,12 +13,14 @@ import {
 } from "../ui/tooltip";
 
 export interface Props {
+  disabled?: boolean;
   formAction: (payload: FormData) => void;
   placeholder: string;
   promptIdea?: string;
 }
 
 export function ImageGenerationForm({
+  disabled,
   formAction,
   placeholder,
   promptIdea,
@@ -40,6 +42,7 @@ export function ImageGenerationForm({
     <form action={formAction}>
       <PromptInput
         ref={inputRef}
+        disabled={disabled}
         name="prompt"
         onChange={onChange}
         placeholder={placeholder}
@@ -54,7 +57,7 @@ export function ImageGenerationForm({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  className="px-0 cursor-pointer text-sm text-muted-foreground font-extralight whitespace-normal text-left h-auto"
+                  className="cursor-pointer text-sm text-muted-foreground font-extralight whitespace-normal text-left h-auto"
                   onClick={onInspirationClicked}
                   type="button"
                   variant="link"

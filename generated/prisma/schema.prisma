@@ -9,7 +9,10 @@ datasource db {
 }
 
 model Image {
-  id    Int    @id @default(autoincrement())
-  title String
-  url   String
+  id       Int     @id @default(autoincrement())
+  title    String
+  url      String
+  parent   Image?  @relation("Source", fields: [parentId], references: [id])
+  parentId Int?
+  children Image[] @relation("Source")
 }

@@ -1,4 +1,5 @@
-import { Repeat2 } from "lucide-react";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -11,7 +12,6 @@ import { Image } from "../ui/image";
 import { Image as ImageSchema } from "../../../generated/prisma";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Zoom } from "../ui/zoom";
-import Link from "next/link";
 
 interface Props {
   images: ImageSchema[];
@@ -28,17 +28,17 @@ export function ImageGallery({ images }: Props) {
               <Image alt={image.title} src={image.url} />
             </CardContent>
             <CardFooter className="text-muted-foreground">
-              {image.title}
+              <p className="flex-1">{image.title}</p>
               <CardAction>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link href={`/i/${image.id}`}>
                       <Button className="cursor-pointer" variant="ghost">
-                        <Repeat2 />
+                        <Pencil />
                       </Button>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent>Remix</TooltipContent>
+                  <TooltipContent>Edit</TooltipContent>
                 </Tooltip>
               </CardAction>
             </CardFooter>

@@ -117,12 +117,18 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.ImageScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  url: 'url'
+  url: 'url',
+  parentId: 'parentId'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

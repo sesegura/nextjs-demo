@@ -20,6 +20,11 @@ export function Image({
 
   return (
     <div className={cn("relative w-full aspect-square", className)}>
+      {title && (
+        <ImageTitle loading={!ready} title={title}>
+          {title}
+        </ImageTitle>
+      )}
       {!ready && <Skeleton className="w-full aspect-square" />}
       <img
         {...imgProps}
@@ -31,27 +36,30 @@ export function Image({
         onLoad={() => setLoaded(true)}
         src={src || undefined}
       />
-      {title && <ImageTitle className="mt-4" loading={!ready} title={title} />}
     </div>
   );
 }
 
-type ImageTitleProps = React.ComponentProps<"div"> & {
-  loading: boolean;
-  title: string;
+type ImageTitleProps = React.ComponentProps<"p"> & {
+  loading?: boolean;
 };
 
-function ImageTitle({ className, loading, title }: ImageTitleProps) {
+export function ImageTitle({
+  className,
+  children,
+  loading = false,
+  title,
+}: ImageTitleProps) {
   return (
     <p
       className={cn(
-        "text-md text-muted-foreground font-extralight italic",
+        "w-full text-md text-left text-muted-foreground font-extralight italic",
         loading && "animate-pulse",
         className
       )}
       title={title}
     >
-      {title}
+      {children}
     </p>
   );
 }

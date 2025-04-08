@@ -1,6 +1,5 @@
 import { PrismaClient } from "../../../../generated/prisma";
-import { ImageRemix } from "@/components/image-generation/remix";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ImageEditor } from "@/components/image-generation/edit/editor";
 
 const prisma = new PrismaClient();
 
@@ -11,19 +10,21 @@ export default async function ImagePage({ params }: { params: Params }) {
 
   const image = await prisma.image.findUnique({
     where: { id: +id },
+    include: {
+      parent: true,
+    },
   });
 
   if (!image) {
-    return (
-      <div className="w-full mx-auto md:w-1/2">
-        <Skeleton className="w-full aspect-square" />
-      </div>
-    );
+    return null;
   }
 
   return (
     <div className="w-full mx-auto md:w-1/2">
-      <ImageRemix image={image} />
+      <div className="flex flex-col items-center">
+        <ImageEditor image={image} />
+      </div>
+      <div className="min-h-[154px]" />
     </div>
   );
 }

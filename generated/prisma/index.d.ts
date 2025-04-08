@@ -864,6 +864,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type ImageCountOutputType
+   */
+
+  export type ImageCountOutputType = {
+    children: number
+  }
+
+  export type ImageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    children?: boolean | ImageCountOutputTypeCountChildrenArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ImageCountOutputType without action
+   */
+  export type ImageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageCountOutputType
+     */
+    select?: ImageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ImageCountOutputType without action
+   */
+  export type ImageCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ImageWhereInput
+  }
+
 
   /**
    * Models
@@ -883,56 +913,66 @@ export namespace Prisma {
 
   export type ImageAvgAggregateOutputType = {
     id: number | null
+    parentId: number | null
   }
 
   export type ImageSumAggregateOutputType = {
     id: number | null
+    parentId: number | null
   }
 
   export type ImageMinAggregateOutputType = {
     id: number | null
     title: string | null
     url: string | null
+    parentId: number | null
   }
 
   export type ImageMaxAggregateOutputType = {
     id: number | null
     title: string | null
     url: string | null
+    parentId: number | null
   }
 
   export type ImageCountAggregateOutputType = {
     id: number
     title: number
     url: number
+    parentId: number
     _all: number
   }
 
 
   export type ImageAvgAggregateInputType = {
     id?: true
+    parentId?: true
   }
 
   export type ImageSumAggregateInputType = {
     id?: true
+    parentId?: true
   }
 
   export type ImageMinAggregateInputType = {
     id?: true
     title?: true
     url?: true
+    parentId?: true
   }
 
   export type ImageMaxAggregateInputType = {
     id?: true
     title?: true
     url?: true
+    parentId?: true
   }
 
   export type ImageCountAggregateInputType = {
     id?: true
     title?: true
     url?: true
+    parentId?: true
     _all?: true
   }
 
@@ -1026,6 +1066,7 @@ export namespace Prisma {
     id: number
     title: string
     url: string
+    parentId: number | null
     _count: ImageCountAggregateOutputType | null
     _avg: ImageAvgAggregateOutputType | null
     _sum: ImageSumAggregateOutputType | null
@@ -1051,35 +1092,59 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     url?: boolean
+    parentId?: boolean
+    parent?: boolean | Image$parentArgs<ExtArgs>
+    children?: boolean | Image$childrenArgs<ExtArgs>
+    _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     url?: boolean
+    parentId?: boolean
+    parent?: boolean | Image$parentArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
     url?: boolean
+    parentId?: boolean
+    parent?: boolean | Image$parentArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
   export type ImageSelectScalar = {
     id?: boolean
     title?: boolean
     url?: boolean
+    parentId?: boolean
   }
 
-  export type ImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "url", ExtArgs["result"]["image"]>
+  export type ImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "url" | "parentId", ExtArgs["result"]["image"]>
+  export type ImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    parent?: boolean | Image$parentArgs<ExtArgs>
+    children?: boolean | Image$childrenArgs<ExtArgs>
+    _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    parent?: boolean | Image$parentArgs<ExtArgs>
+  }
+  export type ImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    parent?: boolean | Image$parentArgs<ExtArgs>
+  }
 
   export type $ImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Image"
-    objects: {}
+    objects: {
+      parent: Prisma.$ImagePayload<ExtArgs> | null
+      children: Prisma.$ImagePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
       url: string
+      parentId: number | null
     }, ExtArgs["result"]["image"]>
     composites: {}
   }
@@ -1474,6 +1539,8 @@ export namespace Prisma {
    */
   export interface Prisma__ImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    parent<T extends Image$parentArgs<ExtArgs> = {}>(args?: Subset<T, Image$parentArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    children<T extends Image$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Image$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1506,6 +1573,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Image", 'Int'>
     readonly title: FieldRef<"Image", 'String'>
     readonly url: FieldRef<"Image", 'String'>
+    readonly parentId: FieldRef<"Image", 'Int'>
   }
     
 
@@ -1522,6 +1590,10 @@ export namespace Prisma {
      * Omit specific fields from the Image
      */
     omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
     /**
      * Filter, which Image to fetch.
      */
@@ -1541,6 +1613,10 @@ export namespace Prisma {
      */
     omit?: ImageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    /**
      * Filter, which Image to fetch.
      */
     where: ImageWhereUniqueInput
@@ -1558,6 +1634,10 @@ export namespace Prisma {
      * Omit specific fields from the Image
      */
     omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
     /**
      * Filter, which Image to fetch.
      */
@@ -1607,6 +1687,10 @@ export namespace Prisma {
      */
     omit?: ImageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    /**
      * Filter, which Image to fetch.
      */
     where?: ImageWhereInput
@@ -1655,6 +1739,10 @@ export namespace Prisma {
      */
     omit?: ImageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    /**
      * Filter, which Images to fetch.
      */
     where?: ImageWhereInput
@@ -1698,6 +1786,10 @@ export namespace Prisma {
      */
     omit?: ImageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    /**
      * The data needed to create a Image.
      */
     data: XOR<ImageCreateInput, ImageUncheckedCreateInput>
@@ -1729,6 +1821,10 @@ export namespace Prisma {
      * The data used to create many Images.
      */
     data: ImageCreateManyInput | ImageCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1743,6 +1839,10 @@ export namespace Prisma {
      * Omit specific fields from the Image
      */
     omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
     /**
      * The data needed to update a Image.
      */
@@ -1795,6 +1895,10 @@ export namespace Prisma {
      * Limit how many Images to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1809,6 +1913,10 @@ export namespace Prisma {
      * Omit specific fields from the Image
      */
     omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
     /**
      * The filter to search for the Image to update in case it exists.
      */
@@ -1836,6 +1944,10 @@ export namespace Prisma {
      */
     omit?: ImageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    /**
      * Filter which Image to delete.
      */
     where: ImageWhereUniqueInput
@@ -1856,6 +1968,49 @@ export namespace Prisma {
   }
 
   /**
+   * Image.parent
+   */
+  export type Image$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Image
+     */
+    select?: ImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Image
+     */
+    omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    where?: ImageWhereInput
+  }
+
+  /**
+   * Image.children
+   */
+  export type Image$childrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Image
+     */
+    select?: ImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Image
+     */
+    omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    where?: ImageWhereInput
+    orderBy?: ImageOrderByWithRelationInput | ImageOrderByWithRelationInput[]
+    cursor?: ImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
+  }
+
+  /**
    * Image without action
    */
   export type ImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1867,6 +2022,10 @@ export namespace Prisma {
      * Omit specific fields from the Image
      */
     omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
   }
 
 
@@ -1884,7 +2043,8 @@ export namespace Prisma {
   export const ImageScalarFieldEnum: {
     id: 'id',
     title: 'title',
-    url: 'url'
+    url: 'url',
+    parentId: 'parentId'
   };
 
   export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
@@ -1896,6 +2056,14 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -1934,12 +2102,18 @@ export namespace Prisma {
     id?: IntFilter<"Image"> | number
     title?: StringFilter<"Image"> | string
     url?: StringFilter<"Image"> | string
+    parentId?: IntNullableFilter<"Image"> | number | null
+    parent?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    children?: ImageListRelationFilter
   }
 
   export type ImageOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     url?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    parent?: ImageOrderByWithRelationInput
+    children?: ImageOrderByRelationAggregateInput
   }
 
   export type ImageWhereUniqueInput = Prisma.AtLeast<{
@@ -1949,12 +2123,16 @@ export namespace Prisma {
     NOT?: ImageWhereInput | ImageWhereInput[]
     title?: StringFilter<"Image"> | string
     url?: StringFilter<"Image"> | string
+    parentId?: IntNullableFilter<"Image"> | number | null
+    parent?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    children?: ImageListRelationFilter
   }, "id">
 
   export type ImageOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     url?: SortOrder
+    parentId?: SortOrderInput | SortOrder
     _count?: ImageCountOrderByAggregateInput
     _avg?: ImageAvgOrderByAggregateInput
     _max?: ImageMaxOrderByAggregateInput
@@ -1969,34 +2147,44 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Image"> | number
     title?: StringWithAggregatesFilter<"Image"> | string
     url?: StringWithAggregatesFilter<"Image"> | string
+    parentId?: IntNullableWithAggregatesFilter<"Image"> | number | null
   }
 
   export type ImageCreateInput = {
     title: string
     url: string
+    parent?: ImageCreateNestedOneWithoutChildrenInput
+    children?: ImageCreateNestedManyWithoutParentInput
   }
 
   export type ImageUncheckedCreateInput = {
     id?: number
     title: string
     url: string
+    parentId?: number | null
+    children?: ImageUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type ImageUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    parent?: ImageUpdateOneWithoutChildrenNestedInput
+    children?: ImageUpdateManyWithoutParentNestedInput
   }
 
   export type ImageUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
+    children?: ImageUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type ImageCreateManyInput = {
     id?: number
     title: string
     url: string
+    parentId?: number | null
   }
 
   export type ImageUpdateManyMutationInput = {
@@ -2008,6 +2196,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2035,30 +2224,66 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ImageNullableScalarRelationFilter = {
+    is?: ImageWhereInput | null
+    isNot?: ImageWhereInput | null
+  }
+
+  export type ImageListRelationFilter = {
+    every?: ImageWhereInput
+    some?: ImageWhereInput
+    none?: ImageWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type ImageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ImageCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     url?: SortOrder
+    parentId?: SortOrder
   }
 
   export type ImageAvgOrderByAggregateInput = {
     id?: SortOrder
+    parentId?: SortOrder
   }
 
   export type ImageMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     url?: SortOrder
+    parentId?: SortOrder
   }
 
   export type ImageMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     url?: SortOrder
+    parentId?: SortOrder
   }
 
   export type ImageSumOrderByAggregateInput = {
     id?: SortOrder
+    parentId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2094,8 +2319,68 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type ImageCreateNestedOneWithoutChildrenInput = {
+    create?: XOR<ImageCreateWithoutChildrenInput, ImageUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutChildrenInput
+    connect?: ImageWhereUniqueInput
+  }
+
+  export type ImageCreateNestedManyWithoutParentInput = {
+    create?: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput> | ImageCreateWithoutParentInput[] | ImageUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: ImageCreateOrConnectWithoutParentInput | ImageCreateOrConnectWithoutParentInput[]
+    createMany?: ImageCreateManyParentInputEnvelope
+    connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+  }
+
+  export type ImageUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput> | ImageCreateWithoutParentInput[] | ImageUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: ImageCreateOrConnectWithoutParentInput | ImageCreateOrConnectWithoutParentInput[]
+    createMany?: ImageCreateManyParentInputEnvelope
+    connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type ImageUpdateOneWithoutChildrenNestedInput = {
+    create?: XOR<ImageCreateWithoutChildrenInput, ImageUncheckedCreateWithoutChildrenInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutChildrenInput
+    upsert?: ImageUpsertWithoutChildrenInput
+    disconnect?: ImageWhereInput | boolean
+    delete?: ImageWhereInput | boolean
+    connect?: ImageWhereUniqueInput
+    update?: XOR<XOR<ImageUpdateToOneWithWhereWithoutChildrenInput, ImageUpdateWithoutChildrenInput>, ImageUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type ImageUpdateManyWithoutParentNestedInput = {
+    create?: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput> | ImageCreateWithoutParentInput[] | ImageUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: ImageCreateOrConnectWithoutParentInput | ImageCreateOrConnectWithoutParentInput[]
+    upsert?: ImageUpsertWithWhereUniqueWithoutParentInput | ImageUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: ImageCreateManyParentInputEnvelope
+    set?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    disconnect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    delete?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    update?: ImageUpdateWithWhereUniqueWithoutParentInput | ImageUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: ImageUpdateManyWithWhereWithoutParentInput | ImageUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: ImageScalarWhereInput | ImageScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2104,6 +2389,28 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ImageUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput> | ImageCreateWithoutParentInput[] | ImageUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: ImageCreateOrConnectWithoutParentInput | ImageCreateOrConnectWithoutParentInput[]
+    upsert?: ImageUpsertWithWhereUniqueWithoutParentInput | ImageUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: ImageCreateManyParentInputEnvelope
+    set?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    disconnect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    delete?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    connect?: ImageWhereUniqueInput | ImageWhereUniqueInput[]
+    update?: ImageUpdateWithWhereUniqueWithoutParentInput | ImageUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: ImageUpdateManyWithWhereWithoutParentInput | ImageUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: ImageScalarWhereInput | ImageScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2129,6 +2436,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2173,6 +2491,148 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ImageCreateWithoutChildrenInput = {
+    title: string
+    url: string
+    parent?: ImageCreateNestedOneWithoutChildrenInput
+  }
+
+  export type ImageUncheckedCreateWithoutChildrenInput = {
+    id?: number
+    title: string
+    url: string
+    parentId?: number | null
+  }
+
+  export type ImageCreateOrConnectWithoutChildrenInput = {
+    where: ImageWhereUniqueInput
+    create: XOR<ImageCreateWithoutChildrenInput, ImageUncheckedCreateWithoutChildrenInput>
+  }
+
+  export type ImageCreateWithoutParentInput = {
+    title: string
+    url: string
+    children?: ImageCreateNestedManyWithoutParentInput
+  }
+
+  export type ImageUncheckedCreateWithoutParentInput = {
+    id?: number
+    title: string
+    url: string
+    children?: ImageUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type ImageCreateOrConnectWithoutParentInput = {
+    where: ImageWhereUniqueInput
+    create: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput>
+  }
+
+  export type ImageCreateManyParentInputEnvelope = {
+    data: ImageCreateManyParentInput | ImageCreateManyParentInput[]
+  }
+
+  export type ImageUpsertWithoutChildrenInput = {
+    update: XOR<ImageUpdateWithoutChildrenInput, ImageUncheckedUpdateWithoutChildrenInput>
+    create: XOR<ImageCreateWithoutChildrenInput, ImageUncheckedCreateWithoutChildrenInput>
+    where?: ImageWhereInput
+  }
+
+  export type ImageUpdateToOneWithWhereWithoutChildrenInput = {
+    where?: ImageWhereInput
+    data: XOR<ImageUpdateWithoutChildrenInput, ImageUncheckedUpdateWithoutChildrenInput>
+  }
+
+  export type ImageUpdateWithoutChildrenInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    parent?: ImageUpdateOneWithoutChildrenNestedInput
+  }
+
+  export type ImageUncheckedUpdateWithoutChildrenInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type ImageUpsertWithWhereUniqueWithoutParentInput = {
+    where: ImageWhereUniqueInput
+    update: XOR<ImageUpdateWithoutParentInput, ImageUncheckedUpdateWithoutParentInput>
+    create: XOR<ImageCreateWithoutParentInput, ImageUncheckedCreateWithoutParentInput>
+  }
+
+  export type ImageUpdateWithWhereUniqueWithoutParentInput = {
+    where: ImageWhereUniqueInput
+    data: XOR<ImageUpdateWithoutParentInput, ImageUncheckedUpdateWithoutParentInput>
+  }
+
+  export type ImageUpdateManyWithWhereWithoutParentInput = {
+    where: ImageScalarWhereInput
+    data: XOR<ImageUpdateManyMutationInput, ImageUncheckedUpdateManyWithoutParentInput>
+  }
+
+  export type ImageScalarWhereInput = {
+    AND?: ImageScalarWhereInput | ImageScalarWhereInput[]
+    OR?: ImageScalarWhereInput[]
+    NOT?: ImageScalarWhereInput | ImageScalarWhereInput[]
+    id?: IntFilter<"Image"> | number
+    title?: StringFilter<"Image"> | string
+    url?: StringFilter<"Image"> | string
+    parentId?: IntNullableFilter<"Image"> | number | null
+  }
+
+  export type ImageCreateManyParentInput = {
+    id?: number
+    title: string
+    url: string
+  }
+
+  export type ImageUpdateWithoutParentInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    children?: ImageUpdateManyWithoutParentNestedInput
+  }
+
+  export type ImageUncheckedUpdateWithoutParentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    children?: ImageUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type ImageUncheckedUpdateManyWithoutParentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
 

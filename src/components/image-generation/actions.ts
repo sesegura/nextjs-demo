@@ -1,7 +1,7 @@
 "use server";
 
 import { OpenAI } from "openai";
-import { Image, PrismaClient } from "../../../generated/prisma";
+import { Image as ImageSchema, PrismaClient } from "../../../generated/prisma";
 import { redirect } from "next/navigation";
 
 const openai = new OpenAI({
@@ -13,7 +13,7 @@ const prisma = new PrismaClient();
 export async function generateImage(
   prevState: any,
   formData: FormData
-): Promise<Image | undefined> {
+): Promise<ImageSchema | undefined> {
   const prompt = formData.get("prompt")?.toString() || "";
 
   if (process.env.OPENAI_ENABLED == "0") {
