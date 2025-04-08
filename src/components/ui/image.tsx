@@ -3,13 +3,13 @@
 import { cn } from "@/lib/utils";
 import { Skeleton } from "./skeleton";
 import { useState } from "react";
-import NextImage from "next/image";
 
-interface ImageProps extends React.ComponentProps<typeof NextImage> {
+interface ImageProps extends React.ComponentProps<"img"> {
   pending?: boolean;
 }
 
 export function Image({
+  alt,
   className,
   pending,
   src: srcProp,
@@ -29,15 +29,17 @@ export function Image({
         </ImageTitle>
       )}
       {!ready && <Skeleton className="w-full aspect-square" />}
-      <NextImage
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         {...imageProps}
+        alt={alt}
         className={cn(
           "w-full h-auto rounded transition-opacity duration-300",
           ready ? "opacity-100 shadow-md" : "opacity-0 absolute top-0 left-0"
         )}
         loading="lazy"
         onLoad={() => setLoaded(true)}
-        src={src || ""}
+        src={src || undefined}
       />
     </div>
   );
