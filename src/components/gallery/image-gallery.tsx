@@ -23,7 +23,7 @@ export function ImageGallery({ images }: Props) {
       {images.map((image, index) => (
         <Zoom key={image.id} delay={index * 100}>
           <Link href={`/i/${image.id}`}>
-            <Card>
+            <Card className="hover:bg-accent">
               <CardHeader></CardHeader>
               <CardContent>
                 <Image alt={image.title} src={image.url} />

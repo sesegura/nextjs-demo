@@ -43,14 +43,16 @@ export function ImageEditor({ image }: Props) {
     <>
       {pending && (
         <>
-          <ImageTitle>Generating...</ImageTitle>
+          <ImageTitle className="mb-4" loading>
+            Generating...
+          </ImageTitle>
           {renderImage()}
         </>
       )}
 
       {!pending && (
         <>
-          <ImageTitle title={image.title}>
+          <ImageTitle className="mb-4" title={image.title}>
             {image.title}
             {image.parentId && (
               <>
@@ -64,18 +66,16 @@ export function ImageEditor({ image }: Props) {
             )}
           </ImageTitle>
 
-          <ImageCanvas className="my-4" ref={canvasRef}>
-            {renderImage()}
-          </ImageCanvas>
+          <ImageCanvas ref={canvasRef}>{renderImage()}</ImageCanvas>
         </>
       )}
 
-      <Card className="w-full">
+      <Card className="w-full mt-4">
         <CardContent>
           <ImageGenerationForm
             disabled={pending}
             formAction={formAction}
-            placeholder="Enter what you want to modify from the original image..."
+            placeholder="Edit prompt..."
           />
           <Separator className="my-2" />
           <p className="flex items-center gap-2 text-sm text-muted-foreground font-extralight">

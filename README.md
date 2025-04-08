@@ -20,3 +20,12 @@ so they can later be re-mixed.
 3. Setup SQLite database: `$ npx prisma migrate dev`
 4. Start dev server: `$ npm run dev`
 5. Go to http://localhost:3000
+
+## Areas of improvement
+
+- [ ] Support edits on non-OpenAI images (URLs instead of base64)
+- [ ] Image gallery infinite scroll
+- [ ] Better grid for gallery
+- [ ] Better image generation model once available
+- [ ] Better loading states
+- [ ] Error handling

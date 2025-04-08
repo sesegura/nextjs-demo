@@ -24,7 +24,7 @@ export function Image({
   return (
     <div className={cn("relative w-full aspect-square", className)}>
       {title && (
-        <ImageTitle loading={!ready} title={title}>
+        <ImageTitle className="mb-4" loading={!ready} title={title}>
           {title}
         </ImageTitle>
       )}
