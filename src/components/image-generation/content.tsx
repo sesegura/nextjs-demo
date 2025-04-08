@@ -12,13 +12,13 @@ export function ImageGenerationContent({
 }: Pick<Props, "promptIdea">) {
   const [imagePlaceholder, setImagePlaceholder] = useOptimistic(
     undefined,
-    (_: any, newImage?: ImageSchema) => newImage
+    (_: unknown, newImage?: ImageSchema) => newImage
   );
 
   const [, formAction, pending] = useActionState(
-    async (prevState: any, formData: FormData) => {
+    async (prevState: unknown, formData: FormData) => {
       const title = formData.get("prompt")?.toString() || "";
-      setImagePlaceholder({ id: Date.now(), url: "", title });
+      setImagePlaceholder({ id: Date.now(), url: "", parentId: null, title });
 
       return generateImage(prevState, formData);
     },

@@ -22,27 +22,27 @@ export function ImageGallery({ images }: Props) {
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {images.map((image, index) => (
         <Zoom key={image.id} delay={index * 100}>
-          <Card>
-            <CardHeader></CardHeader>
-            <CardContent>
-              <Image alt={image.title} src={image.url} />
-            </CardContent>
-            <CardFooter className="text-muted-foreground">
-              <p className="flex-1">{image.title}</p>
-              <CardAction>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link href={`/i/${image.id}`}>
+          <Link href={`/i/${image.id}`}>
+            <Card>
+              <CardHeader></CardHeader>
+              <CardContent>
+                <Image alt={image.title} src={image.url} />
+              </CardContent>
+              <CardFooter className="text-muted-foreground">
+                <p className="flex-1">{image.title}</p>
+                <CardAction>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
                       <Button className="cursor-pointer" variant="ghost">
                         <Pencil />
                       </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>Edit</TooltipContent>
-                </Tooltip>
-              </CardAction>
-            </CardFooter>
-          </Card>
+                    </TooltipTrigger>
+                    <TooltipContent>Edit</TooltipContent>
+                  </Tooltip>
+                </CardAction>
+              </CardFooter>
+            </Card>
+          </Link>
         </Zoom>
       ))}
     </div>

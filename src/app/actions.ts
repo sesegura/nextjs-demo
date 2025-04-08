@@ -37,7 +37,8 @@ export async function getPromptIdea(): Promise<string> {
     });
 
     return response.choices?.[0]?.message?.content?.trim() || "";
-  } catch (error) {
+  } catch (e) {
+    console.log(e);
     return "";
   }
 }

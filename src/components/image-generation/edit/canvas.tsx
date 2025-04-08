@@ -2,12 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
-import { ReactSketchCanvas } from "react-sketch-canvas";
+import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
 
 const ImageCanvas = forwardRef(
   (
     { className, children }: React.ComponentProps<"div">,
-    ref: React.Ref<any>
+    ref: React.Ref<ReactSketchCanvasRef>
   ) => {
     return (
       <div className={cn("relative w-full", className)}>
@@ -29,5 +29,7 @@ const ImageCanvas = forwardRef(
     );
   }
 );
+
+ImageCanvas.displayName = "ImageCanvas";
 
 export { ImageCanvas };

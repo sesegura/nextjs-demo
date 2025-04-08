@@ -23,7 +23,7 @@ interface InputData {
 }
 
 export async function editImage(
-  prevState: any,
+  prevState: unknown,
   formData: FormData,
   input: InputData
 ): Promise<ImageSchema | undefined> {

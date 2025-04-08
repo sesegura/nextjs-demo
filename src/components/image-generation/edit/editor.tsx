@@ -17,10 +17,13 @@ interface Props {
 }
 
 export function ImageEditor({ image }: Props) {
+  // The type definition for `exportImage` from ReactSketchCanvasRef doesn't allow dimensions,
+  // although it does support them, so we need to use `any` here to avoid overwriting the type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const canvasRef = useRef<any>(null);
 
   const [, formAction, pending] = useActionState(
-    async (prevState: any, formData: FormData) => {
+    async (prevState: unknown, formData: FormData) => {
       const mask =
         (await canvasRef.current?.exportImage("png", 512, 512)) || "";
 

@@ -3,18 +3,21 @@
 import { cn } from "@/lib/utils";
 import { Skeleton } from "./skeleton";
 import { useState } from "react";
+import NextImage from "next/image";
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface ImageProps extends React.ComponentProps<typeof NextImage> {
   pending?: boolean;
 }
 
 export function Image({
   className,
   pending,
-  src,
+  src: srcProp,
   title,
-  ...imgProps
+  ...imageProps
 }: ImageProps) {
+  const src = srcProp as string;
+
   const [loaded, setLoaded] = useState(src?.startsWith("data:image") || false);
   const ready = !pending && loaded;
 
@@ -26,15 +29,15 @@ export function Image({
         </ImageTitle>
       )}
       {!ready && <Skeleton className="w-full aspect-square" />}
-      <img
-        {...imgProps}
+      <NextImage
+        {...imageProps}
         className={cn(
           "w-full h-auto rounded transition-opacity duration-300",
           ready ? "opacity-100 shadow-md" : "opacity-0 absolute top-0 left-0"
         )}
         loading="lazy"
         onLoad={() => setLoaded(true)}
-        src={src || undefined}
+        src={src || ""}
       />
     </div>
   );

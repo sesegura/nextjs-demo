@@ -11,7 +11,7 @@ const openai = new OpenAI({
 const prisma = new PrismaClient();
 
 export async function generateImage(
-  prevState: any,
+  _: unknown,
   formData: FormData
 ): Promise<ImageSchema | undefined> {
   const prompt = formData.get("prompt")?.toString() || "";
