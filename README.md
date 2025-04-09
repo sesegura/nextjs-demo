@@ -24,7 +24,7 @@ so they can later be re-mixed.
 ## Areas of improvement
 
 - [ ] Support edits on non-OpenAI images (URLs instead of base64)
-- [ ] Image gallery infinite scroll
+- [x] Image gallery infinite scroll
 - [ ] Better grid for gallery
 - [ ] Better image generation model once available
 - [ ] Better loading states
